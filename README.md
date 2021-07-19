@@ -1,4 +1,4 @@
-# Tâm tình của tác giả o
+# Tâm tình của tác giả
 Xin chào 500ae, lại là mình đây, Nguyễn Phước Lộc đây :d :d :d
 Hôm nay tui sẽ hướng dẫn anh em cách ăn cơm bằng đũa như thế nào???
 Ý nhầm, Project này có mục đích phục vụ cho việc update sản phẩm nhanh hơn 500 lần lên website công ty
@@ -15,4 +15,4 @@ Sau đó các bạn vứt xác máy tính vào xọt rác. nhoaaaaaaaaaaaaaaaaaa
 
 ## CÁC TÍNH NĂNG HIỆN CÓ
 1. Tự động điền thông tin vào file.csv
-2. HẾTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+2. HẾTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
