@@ -304,6 +304,8 @@ def write_info_to_file(ordinal_number_product):
 
             # Cho vòng lặp chạy tạo mỗi hình là một hàng
             for numberImages in range(0, number_imgages):
+                if numberImages == 10:
+                    break
                 value_row = [urlShort, nameProduct, decriptionProduct, 
                                     '', valueProducer, type_product, type_product, 'Yes', 
                                     'Title', 'Default Title', '', '', '', '', barcode, '0', 'Haravan', 
