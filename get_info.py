@@ -307,7 +307,7 @@ def write_info_to_file(ordinal_number_product):
                 value_row = [urlShort, nameProduct, decriptionProduct, 
                                     '', valueProducer, type_product, type_product, 'Yes', 
                                     'Title', 'Default Title', '', '', '', '', barcode, '0', 'Haravan', 
-                                    '50', 'continue', '', price_product, price_product, 'Yes', 
+                                    '50', 'deny', '', price_product, price_product, 'Yes', 
                                     'Yes', barcode, list_link_images[numberImages], nameProduct, 
                                     'No', nameProduct, nameProduct, '', '', '', '', '', '', '', '', '', 
                                     '', '', timeNow, timeNow, 'No', 'No', 'No', 'No', 'No', 'No', 'No', 
