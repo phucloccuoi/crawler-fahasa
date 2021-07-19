@@ -1,10 +1,10 @@
-# -------------------------o Tâm tình của tác giả o-------------------------------#
+# ----------o Tâm tình của tác giả o-----------#
 Xin chào 500ae, lại là mình đây, Nguyễn Phước Lộc đây :d :d :d
 Hôm nay tui sẽ hướng dẫn anh em cách ăn cơm bằng đũa như thế nào???
 Ý nhầm, Project này có mục đích phục vụ cho việc update sản phẩm nhanh hơn 500 lần lên website công ty
 Để làm việc với project các bạn chỉ cần mua 1 cây búa về và đập máy tính bạn mỗi khi có lỗi
 Sau đó các bạn vứt xác máy tính vào xọt rác. nhoaaaaaaaaaaaaaaaaaaaaaaaaa
-# ------------------------o Nghỉ khỏe đi người anh em o---------------------------#
+# -------o Nghỉ khỏe đi người anh em o---------#
 
 ## CÁC TÍNH NĂNG CÒN THIẾU
 1. Khối lượng của sản phẩm chưa được thêm vào
