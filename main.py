@@ -1,9 +1,10 @@
 # Khai báo các modules
 import get_info
+import handing_file
 import os
 
 # Khởi tạo biến tính số lượng sản phẩm trong file đầu vào
-number_product = len(get_info.list_info_input_product())
+number_product = len(handing_file.list_info_input_product())
 
 # Khởi tạo biến kiểm tra ghi tiếp hay không ghi tiếp là KHÔNG GHI
 user_innput = 'n'

@@ -8,12 +8,12 @@ def split_big_string(input_string):
     - list_sub_string: hàm trả về danh sách chuỗi con
     '''
     # Tách các chuỗi thành chuỗi con khi gặp dấu phẩy, và tối đa là 4 chuỗi con
-    list_sub_string = input_string.split(",", 3)
+    list_sub_string = input_string.split(",", 4)
 
     # Xóa ký tự xuống dòng trong string
-    temp = list_sub_string[3]
+    temp = list_sub_string[4]
     temp = temp.rstrip("\n")
-    list_sub_string[3] = temp
+    list_sub_string[4] = temp
 
     return list_sub_string
 # Kết thúc hàm chia nhỏ chuỗi lớn thành các chuỗi con
