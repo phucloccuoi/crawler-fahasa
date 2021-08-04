@@ -18,7 +18,7 @@ def get_name_product(ordinal_number_product):
     temp = source_page.find("a.include-in-gallery", first=True)
     name_product = temp.attrs["title"]
 
-    return str(name_product)
+    return str(name_product).strip()
 # Kêt thúc hàm lấy ra tên sản phẩm
 
 # Hàm lấy thông tin Url theo đinh dạng "viet-chi-staedtler-134-2b"
@@ -76,17 +76,9 @@ def get_description(ordinal_number_product, name_product):
     description_product = source_page.find("div.std", first=True)
     description_product_table = source_page.find("div.product_view_tab_content_additional", first=True)
 
-    # Chuyển các giá trị html sang kiểu string
-    try:
-        string_description_product1 = str(description_product.html)
-    except AttributeError:
-        return -1
-    string_description_product2 = str(description_product_table.html)
+    list_desc_full = [ description_product_table.html, description_product.html]
 
-    # Thêm thẻ h2 vào chuỗi
-    string_description_product = string_description_product2 + string_description_product1
-
-    return handing_string.format_description(string_description_product, name_product)
+    return list_desc_full
 # Kết thúc hàm lấy mô tả của sản phẩm và định dạng theo chuẩn
 
 # Hàm lấy thời gian hiện tại
@@ -167,8 +159,12 @@ def write_info_to_file(ordinal_number_product):
         inventory = handing_file.get_info_from_file(ordinal_number_product, 4)
 
         # Giá trị cho cột Mô tả
-        decriptionProduct = get_description(ordinal_number_product, nameProduct)
+        list_str = get_description(ordinal_number_product, nameProduct)
+        desc_full = handing_string.format_description(list_str, nameProduct)
 
+        # Giá trị cho cột Mô tả SEO
+        desc_320_char = handing_string.get_description_SEO(list_str[1], nameProduct)
+        
         # Giá trị cho cột Nhà cung cấp
         valueProducer = handing_file.get_info_from_file(ordinal_number_product, 3)
 
@@ -198,12 +194,12 @@ def write_info_to_file(ordinal_number_product):
             for numberImages in range(0, number_imgages):
                 if numberImages == 10:
                     break
-                value_row = [urlShort, nameProduct, decriptionProduct, 
+                value_row = [urlShort, nameProduct, desc_full, 
                                     '', valueProducer, type_product, type_product, 'Yes', 
                                     'Title', 'Default Title', '', '', '', '', barcode, '0', 'Haravan', 
                                     inventory, 'deny', '', price_product, price_product, 'Yes', 
                                     'Yes', barcode, list_link_images[numberImages], nameProduct, 
-                                    'No', nameProduct, nameProduct, '', '', '', '', '', '', '', '', '', 
+                                    'No', nameProduct, desc_320_char, '', '', '', '', '', '', '', '', '', 
                                     '', '', timeNow, timeNow, 'No', 'No', 'No', 'No', 'No', 'No', 'No', 
                                     'Yes', 'No', 'No', 'Yes']
                 value_row_image = [urlShort, '', '', '', '', '', '', 'Yes', '', '', '', '', '', '', 
