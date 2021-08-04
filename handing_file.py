@@ -24,8 +24,7 @@ def get_info_from_file(ordinal_number_product, number_sub_str):
     - Chức năng: lấy ra giá từ file thông tin sản phẩm
     - result: trả về 1 chuỗi con tương ứng với number_sub_str truyền vào
     - ordinal_number_product: số thứ tự của sản phẩm trong file thông tin sản phẩm
-    - result: số thứ tự chuỗi con trong một hàng
     '''
-    result = handing_string.split_big_string(list_info_input_product()[ordinal_number_product])[number_sub_str]
+    result = handing_string.split_big_str(list_info_input_product()[ordinal_number_product], ",", 4, 1)[number_sub_str]
     return result
 # Kêt thúc hàm lấy ra thông tin từ file input.txt

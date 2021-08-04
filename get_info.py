@@ -86,7 +86,7 @@ def get_description(ordinal_number_product, name_product):
     # Thêm thẻ h2 vào chuỗi
     string_description_product = string_description_product2 + string_description_product1
 
-    return handing_string.edit_format_description(string_description_product, name_product)
+    return handing_string.format_description(string_description_product, name_product)
 # Kết thúc hàm lấy mô tả của sản phẩm và định dạng theo chuẩn
 
 # Hàm lấy thời gian hiện tại
