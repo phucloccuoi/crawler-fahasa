@@ -110,12 +110,15 @@ def format_description(list_desc_full, name_product):
     name_h2 = "<h2>" + name_product + "</h2>\n"
     name_h3 = "<h3><strong>" + name_product + "</strong></h3>\n"
 
+
+    # Thêm định dạng các thẻ tên cho chuỗi table
+    str_desc_0 = str(name_h2 + "<div>" + str_desc_0 + "</div>")
+    
     # Nếu không có chuỗi tên rồi thì thôi bó tay
     if str_desc_1.find(name_product) != -1:
         str_desc_1.replace(name_product, '', 2)
     else:
-        # Thêm định dạng các thẻ tên theo định dạng
-        str_desc_0 = str(name_h2 + "<div>" + str_desc_0 + "</div>")
+        # Thêm định dạng các thẻ tên cho chuỗi paragraps
         str_desc_1 = str("<hr/>" + name_h3 + str_desc_1)
 
     return str_desc_0 + str_desc_1
