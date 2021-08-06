@@ -163,7 +163,7 @@ def write_info_to_file(ordinal_number_product):
         desc_full = handing_string.format_description(list_str, nameProduct)
 
         # Giá trị cho cột Mô tả SEO
-        desc_320_char = handing_string.get_description_SEO(list_str[1], nameProduct)
+        desc_320_char = handing_string.get_description_SEO(list_str[1])
         
         # Giá trị cho cột Nhà cung cấp
         valueProducer = handing_file.get_info_from_file(ordinal_number_product, 3)
@@ -186,7 +186,6 @@ def write_info_to_file(ordinal_number_product):
 
         # Mở file output.csv và ghi các giá trị thu thập vào file
         with open('output.csv', 'a+', newline = '', encoding='utf-8') as file_output:
-            
             # Khai báo đối tượng ghi file
             writer = csv.writer(file_output, delimiter=',')
 
