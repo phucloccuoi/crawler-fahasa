@@ -5,7 +5,7 @@ list_all_links_product = [] # Danh sách các link sản phẩm
 list_all_html_products = [] # Danh sách các respone trả về
 
 # Hàm tạo một phiên kết nối vào một website với liên kêt cho trước
-def get_session(url_full):
+def get_session(url_full, time_out):
     '''
     - Chức năng: tạo một phiên kết nối vào một website với liên kêt cho trước
     - url_full: địa chỉ website muốn truy cập
@@ -19,13 +19,13 @@ def get_session(url_full):
 
     # Tổng thời gian Loading bằng thời gian tối đa là 6s + 2s và tối thiểu là 2s + 2s
     try:
-        my_response.html.render(scrolldown=1, sleep=6, keep_page=True)
+        my_response.html.render(scrolldown=1, sleep=time_out, keep_page=True)
     except ConnectionRefusedError:
-        my_response.html.render(scrolldown=1, sleep=7, keep_page=True)
+        my_response.html.render(scrolldown=1, sleep=time_out + 1, keep_page=True)
     except RuntimeError:
-        my_response.html.render(scrolldown=1, sleep=8, keep_page=True)
+        my_response.html.render(scrolldown=1, sleep=time_out + 2, keep_page=True)
     except errors.NetworkError:
-         my_response.html.render(scrolldown=1, sleep=5, keep_page=True)
+         my_response.html.render(scrolldown=1, sleep=time_out - 1, keep_page=True)
     finally:
         my_session.close()
 
@@ -44,7 +44,7 @@ def get_link_product(barcode):
     - ordinal_number_product: số thứ tự của sản phẩm trong file thông tin
     '''
     # Truy cập tới trang tìm kiếm sản phẩm
-    search_page = get_session(f"https://www.fahasa.com/search?in_stock=0&q={barcode}")
+    search_page = get_session(f"https://www.fahasa.com/search?in_stock=0&q={barcode}", 6)
 
     try:
         # Tìm kiếm tới thẻ có chứa link sản phẩm
@@ -73,7 +73,7 @@ def access_product_page(ordinal_number_product):
     url_product = list_all_links_product[ordinal_number_product]
     
     # Truy cập tới trang sản phẩm
-    product_page = get_session(url_product)
+    product_page = get_session(url_product, 6)
 
     # Thêm respone sản phẩm vào danh sách lưu trữ respone
     list_all_html_products.append(product_page)

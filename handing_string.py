@@ -107,21 +107,20 @@ def format_description(list_desc_full, name_product):
     str_desc_1 = str(add_str_description(str_desc_1, change_list, changed_list))
 
     # Định dạng heading cho tên sản phẩm
-    name_h2 = "<h2>" + name_product + "</h2>\n"
+    name_h2 = "<h2><strong>" + name_product + "</strong></h2>\n"
     name_h3 = "<h3><strong>" + name_product + "</strong></h3>\n"
-
 
     # Thêm định dạng các thẻ tên cho chuỗi table
     str_desc_0 = str(name_h2 + "<div>" + str_desc_0 + "</div>")
     
-    # Nếu không có chuỗi tên rồi thì thôi bó tay
+    # Nếu có chuỗi tên thì thôi bó tay ### ERRORRRRRRRRRRRRRRRRRRRRRRRR
     if str_desc_1.find(name_product) != -1:
         str_desc_1.replace(name_product, '', 2)
     else:
         # Thêm định dạng các thẻ tên cho chuỗi paragraps
-        str_desc_1 = str("<hr/>" + name_h3 + str_desc_1)
+        str_desc_1 = str(name_h3 + str_desc_1)
 
-    return str_desc_0 + str_desc_1
+    return str_desc_0 + "<hr/>" + str_desc_1
 # Kết thúc hàm chỉnh sửa mô tả theo định dạng người dùng
 
 # Hàm định dạng mô tả cho trường SEO
@@ -149,12 +148,23 @@ def get_description_SEO(desc_SEO):
 
     # Biến lưu trữ vị trí tối đa chuỗi SEO
     saveIndex = 0
+    endStr = 320
+
+    # Kiểm tra độ dài của chuỗi xem có nhỏ hơn 320 không
+    lengtStr = len(desc_SEO)
+    if lengtStr <= 320:
+        endStr = lengtStr
+
     # Giới hạn độ dài của chuỗi SEO chỉ được tối đa 320 ký tự
-    for index in range(0, 320):
+    for index in range(0, endStr):
         if desc_SEO[index] == '.':
             saveIndex = index
+    
     # Lấy chuỗi SEO chuẩn dưới 320 ký tự
-    desc_SEO = desc_SEO[0:saveIndex]
+    if saveIndex == 0:
+        desc_SEO = desc_SEO[0:endStr]
+    else:
+        desc_SEO = desc_SEO[0:saveIndex]
 
     return desc_SEO
 # Kết thúc hàm định dạng mô tả cho trường SEO
