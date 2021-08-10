@@ -1,33 +1,17 @@
 import access_website
-
-# Hàm đọc tất cả các dòng trong file vào danh sách
-def list_info_input_product(file_name):
-    '''
-    - Function: Đưa tất cả các dòng trong file vào danh sách
-    - Return: Danh sách các dòng của file thông tin
-    '''
-    # Mở file dưới chứa thông tin sản phẩm và đọc chúng
-    fileInput = open(file_name, 'r+', encoding='utf-8')
-
-    # Lưu tất cả các dòng của file vào danh sách
-    list_all_lines_of_file = fileInput.readlines()
-
-    # Đòng file thông tin sản phẩm
-    fileInput.close()
-
-    return list_all_lines_of_file
-# Kết thúc hàm đọc tất cả các dòng trong file vào danh sách
-
-# Hàm ghi các barcode không tìm thấy vào file
-def write_error_barcode(list_barcode, len_list, file_name):
-    with open(file_name, 'w+', encoding='utf-8') as file_log:
-        for index in range(0, len_list):
-            file_log.writelines(list_barcode[index])
-    file_log.close()
-# Kết thúc hàm ghi các barcode không tìm thấy vào file
+import handing_file
 
 # Hàm kiểm tra sản phẩm có trên website hay không
 def check_products_has_not(list_barcode, url_destination, research_tag, return_str, markup_str):
+    '''
+    Function: Kiểm tra sản phẩm có trên webiste đích không và lưu vào danh sách
+    - list_barcode: Danh sách đầu vào cần kiểm tra
+    - url_destination: Địa chỉ tìm kiếm sản phẩm của website
+    - research_tag: Thẻ tìm kiếm kết quả trả về
+    - return_str: Chuỗi thông báo kết quả tìm kiếm
+    - markup_str: Phân biệt các trang website với nhau
+    Return: Danh sách barcode
+    '''
     list_return = []
     count = 0
 
@@ -66,19 +50,19 @@ url_fabico = "https://www.fabico.vn/search?type=product&q="
 url_fahasa = "https://www.fahasa.com/catalogsearch/result/?q="
 
 # Khai báo danh sách barcode đầu vào
-list_barcode_first_filter = list_info_input_product(name_file_input)
+list_barcode_first_filter = handing_file.read_file_to_list(name_file_input)
 print('--CHECK IN STARTS FABICO--')
 
-# Gọi hàm xử kiểm tra sản phẩm fabico và ghi vào file
+# Gọi hàm kiểm tra sản phẩm fabico và ghi vào file
 list_not_Found_Fabico = check_products_has_not(list_barcode_first_filter, url_fabico, 'span.collection-size', '(0 sản phẩm)', 'fabico') # FABICO
-write_error_barcode(list_not_Found_Fabico, len(list_not_Found_Fabico), name_file_fabico)
+handing_file.write_list_to_file(list_not_Found_Fabico, len(list_not_Found_Fabico), name_file_fabico)
 
 # Khai báo danh sách barcode không có trên fabico
-list_barcode_second_filter = list_info_input_product(name_file_fabico)
+list_barcode_second_filter = handing_file.read_file_to_list(name_file_fabico)
 print('--CHECK IN STARTS FAHASA--')
 
-# Gọi hàm xử kiểm tra sản phẩm fahasa và ghi vào file
+# Gọi hàm kiểm tra sản phẩm fahasa và ghi vào file
 list_product_on_Fahasa = check_products_has_not(list_barcode_second_filter, url_fahasa, 'p.note-msg', 'Không có sản phẩm phù hợp với từ khóa tìm kiếm của bạn.', 'fahasa') # FAHASA
-write_error_barcode(list_not_Found_Fabico, len(list_product_on_Fahasa), name_file_fahasa)
+handing_file.write_list_to_file(list_product_on_Fahasa, len(list_product_on_Fahasa), name_file_fahasa)
 
 print("-------FINISH--------")

@@ -4,7 +4,7 @@ import handing_file
 import os
 
 # Khởi tạo biến tính số lượng sản phẩm trong file đầu vào
-number_product = len(handing_file.list_info_input_product())
+number_product = len(handing_file.read_file_to_list('input.txt'))
 
 # Khởi tạo biến kiểm tra ghi tiếp hay không ghi tiếp là KHÔNG GHI
 user_innput = 'n'
