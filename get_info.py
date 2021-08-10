@@ -76,7 +76,10 @@ def get_description(ordinal_number_product, name_product):
     description_product = source_page.find("div.std", first=True)
     description_product_table = source_page.find("div.product_view_tab_content_additional", first=True)
 
-    list_desc_full = [ description_product_table.html, description_product.html]
+    try:
+        list_desc_full = [ description_product_table.html, description_product.html]
+    except AttributeError:
+        return -1
 
     return list_desc_full
 # Kết thúc hàm lấy mô tả của sản phẩm và định dạng theo chuẩn
@@ -128,6 +131,14 @@ def write_header_to_file():
     return 1
 # Kêt thúc hàm ghi các tiêu đề vào file output.csv
 
+# Hàm ghi barcode lỗi vào file
+def write_log(barcode):
+    # Nếu sản phẩm không có trên website hoặc lỗi thì lưu vào file
+    with open('error_products.log', 'a+', encoding='utf-8') as error:
+        error.writelines(barcode + '\n')
+    error.close()
+# Kết thúc ghi barcode lỗi vào file
+
 # Hàm ghi các giá trị thu thập được vào file
 def write_info_to_file(ordinal_number_product):
     '''
@@ -142,11 +153,7 @@ def write_info_to_file(ordinal_number_product):
 
     if result_page_product == -1:
         print('>>> No products found!')
-
-        # Nếu sản phẩm không có trên website hoặc lỗi thì lưu vào file
-        with open('error_products.log', 'a+', encoding='utf-8') as error:
-            error.writelines(barcode + '\n')
-        error.close()
+        write_log(barcode)
         return -1
     else:
     # Giá trị cột Url
@@ -160,6 +167,11 @@ def write_info_to_file(ordinal_number_product):
 
         # Giá trị cho cột Mô tả
         list_str = get_description(ordinal_number_product, nameProduct)
+        # Kiểm tra xem có mô tả hay không, neus không có thì ghi vào file lỗi
+        if list_str == -1:
+            print('>>> No products found!')
+            write_log(barcode)
+            return -1
         desc_full = handing_string.format_description(list_str, nameProduct)
 
         # Giá trị cho cột Mô tả SEO

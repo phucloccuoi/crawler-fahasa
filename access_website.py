@@ -1,5 +1,6 @@
 from requests_html import HTMLSession, HTML
 from pyppeteer import errors
+from time import sleep
 
 list_all_links_product = [] # Danh sách các link sản phẩm
 list_all_html_products = [] # Danh sách các respone trả về
@@ -9,23 +10,30 @@ def get_session(url_full, time_out):
     '''
     - Chức năng: tạo một phiên kết nối vào một website với liên kêt cho trước
     - url_full: địa chỉ website muốn truy cập
+    - time_out: Thời gian phản hồi của website, sau đó sẽ đóng
     - result_page: hàm trả về biến loại HTML lưu toàn bộ thông tin html của website
     '''
     # Khởi tạo một phiên kết nối
     my_session = HTMLSession()
 
-    # Tạo một phiên kết nối tới trang đích
-    my_response = my_session.get(url_full)
-
-    # Tổng thời gian Loading bằng thời gian tối đa là 6s + 2s và tối thiểu là 2s + 2s
     try:
+        # Tạo một phiên kết nối tới trang đích
+        my_response = my_session.get(url_full)
+
+        # Tổng thời gian Loading bằng thời gian tối đa là 6s + 2s và tối thiểu là 2s + 2s
+        try:
+            my_response.html.render(scrolldown=1, sleep=time_out, keep_page=True)
+        except ConnectionRefusedError:
+            my_response.html.render(scrolldown=1, sleep=time_out + 1, keep_page=True)
+        except RuntimeError:
+            my_response.html.render(scrolldown=1, sleep=time_out + 2, keep_page=True)
+        except errors.NetworkError:
+            my_response.html.render(scrolldown=1, sleep=time_out - 1, keep_page=True)
+        finally:
+            my_session.close()
+    except errors.TimeoutError:
+        sleep(time_out)
         my_response.html.render(scrolldown=1, sleep=time_out, keep_page=True)
-    except ConnectionRefusedError:
-        my_response.html.render(scrolldown=1, sleep=time_out + 1, keep_page=True)
-    except RuntimeError:
-        my_response.html.render(scrolldown=1, sleep=time_out + 2, keep_page=True)
-    except errors.NetworkError:
-         my_response.html.render(scrolldown=1, sleep=time_out - 1, keep_page=True)
     finally:
         my_session.close()
 
